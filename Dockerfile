@@ -1,0 +1,22 @@
+FROM phusion/baseimage:0.9.15
+
+ENV HOME /root
+COPY . /build
+WORKDIR /tmp
+
+# base env
+RUN apt-get update
+RUN apt-get install -y --force-yes mysql-client php5-cli php5-mysql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl git curl
+
+# nodejs
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+RUN apt-get install -y --force-yes nodejs
+
+# composer
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+
+EXPOSE 8000
+
+WORKDIR /data
+#CMD [ "/usr/bin/php", "-S 127.0.0.1:8000 -t ./public" ]
