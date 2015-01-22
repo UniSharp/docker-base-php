@@ -5,9 +5,9 @@ COPY . /build
 WORKDIR /tmp
 
 # base env
+RUN add-apt-repository -y ppa:nginx/stable
 RUN apt-get update
-RUN apt-get install -y --force-yes mysql-client php5-cli php5-mysql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl git curl make telnet
-RUN apt-get install -y nginx php5-fpm
+RUN apt-get install -y --force-yes mysql-client php5-cli php5-mysql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl git curl make telnet nginx php5-fpm
 
 RUN ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/cli/conf.d/20-mcrypt.ini
 
