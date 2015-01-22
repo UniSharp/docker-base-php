@@ -44,4 +44,4 @@ RUN chmod +x /etc/service/phpfpm/run
 
 #CMD [ "/usr/bin/php", "-S 127.0.0.1:8000 -t ./public" ]
 WORKDIR /data
-CMD true
+CMD ["/sbin/my_init"]
