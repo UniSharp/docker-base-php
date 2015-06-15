@@ -43,6 +43,8 @@ RUN mkdir /etc/service/phpfpm
 ADD _nginx/phpfpm.sh /etc/service/phpfpm/run
 RUN chmod +x /etc/service/phpfpm/run
 
+RUN mkdir -p /data/public && echo "<?php phpinfo();" > /data/public/index.php
+
 #CMD [ "/usr/bin/php", "-S 127.0.0.1:8000 -t ./public" ]
 WORKDIR /data
 CMD ["/sbin/my_init"]
