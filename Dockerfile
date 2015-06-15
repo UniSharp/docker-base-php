@@ -44,6 +44,7 @@ ADD _nginx/phpfpm.sh /etc/service/phpfpm/run
 RUN chmod +x /etc/service/phpfpm/run
 
 RUN mkdir -p /data/public && echo "<?php phpinfo();" > /data/public/index.php
+VOLUME /data
 
 #CMD [ "/usr/bin/php", "-S 127.0.0.1:8000 -t ./public" ]
 WORKDIR /data
