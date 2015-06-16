@@ -43,6 +43,9 @@ RUN mkdir /etc/service/phpfpm
 ADD _nginx/phpfpm.sh /etc/service/phpfpm/run
 RUN chmod +x /etc/service/phpfpm/run
 
+# workround for boot2docker / Kitematic
+RUN usermod -u 1000 www-data
+
 RUN mkdir -p /data/public && echo "<?php phpinfo();" > /data/public/index.php
 VOLUME /data
 
