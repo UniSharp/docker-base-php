@@ -12,6 +12,18 @@ RUN apt-get install -y --force-yes mysql-client php5-cli php5-mysql php5-sqlite 
 RUN ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/cli/conf.d/20-mcrypt.ini
 RUN ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/fpm/conf.d/20-mcrypt.ini
 
+# ruby
+RUN apt-get install -y --force-yes git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+RUN curl -L https://get.rvm.io | bash -s stable
+RUN source /etc/profile.d/rvm.sh
+RUN echo "source /etc/profile.d/rvm.sh" >> ~/.bashrc
+RUN rvm install 2.1.2
+RUN rvm use 2.1.2 –default
+RUN gem install compass
+RUN gem install sass
+
+
 # nodejs
 RUN curl -sL https://deb.nodesource.com/setup | bash -
 RUN apt-get install -y --force-yes nodejs
