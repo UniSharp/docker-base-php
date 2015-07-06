@@ -4,15 +4,25 @@ ENV HOME /root
 COPY . /build
 WORKDIR /tmp
 
-# base env
 RUN add-apt-repository -y ppa:nginx/stable
 RUN apt-get update
-RUN apt-get install -y --force-yes mysql-client php5-cli php5-mysql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl git curl make telnet nginx php5-fpm php5-mongo mongodb-clients
+
+# base env
+RUN apt-get install -y --force-yes git curl make telnet nginx php5-fpm
+
+# PHP
+RUN apt-get install -y --force-yes php5-cli php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl
 
 RUN ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/cli/conf.d/20-mcrypt.ini
 RUN ln -s /etc/php5/mods-available/mcrypt.ini /etc/php5/fpm/conf.d/20-mcrypt.ini
 
-# ruby
+# MySQL
+RUN apt-get install -y --force-yes mysql-client php5-mysql
+
+# MongoDB
+RUN apt-get install -y --force-yes php5-mongo mongodb-clients
+
+# ruby & rvm (not necessary)
 RUN apt-get install -y --force-yes git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN curl -L https://get.rvm.io | bash -s stable
